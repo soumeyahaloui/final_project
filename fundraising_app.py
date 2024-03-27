@@ -603,7 +603,7 @@ class SecondScreen(Screen):
         return button_callback
 
     def fetch_data(self):
-        url = 'https://fund-flask.onrender.com/get_data'
+        url = 'https://final-project-sever.onrender.com/get_data'
         UrlRequest(url, on_success=self.on_request_success, on_failure=self.on_request_failure, on_error=self.on_request_error, on_redirect=self.on_request_redirect)
 
 
@@ -922,7 +922,7 @@ class SecondScreen(Screen):
         self.last_fetched_family_id += 1  
         next_family_id = self.last_fetched_family_id
 
-        base_url = 'https://fund-flask.onrender.com/'  
+        base_url = 'https://final-project-sever.onrender.com/'  
 
         UrlRequest(f'{base_url}/get_family_data/{next_family_id}', on_success=lambda req, res: self.update_frame_with_new_data(f'counter_{self.available_frames.pop(0)}', res), on_error=self.on_request_error, on_failure=self.on_request_error)
     
@@ -1083,7 +1083,7 @@ class SignUpScreen(Screen):
             return
 
         signup_data = {'username': username, 'number': number, 'password': password}
-        signup_url = 'https://fund-flask.onrender.com/register'
+        signup_url = 'https://final-project-sever.onrender.com/register'
         UrlRequest(signup_url, req_body=json.dumps(signup_data),
                    on_success=self.on_signup_success, on_failure=self.on_signup_failure,
                    method='POST', req_headers={'Content-type': 'application/json'})
@@ -1150,7 +1150,7 @@ class LoginScreen(Screen):
         username = self.username_input.text
         password = self.password_input.text
         login_data = {'username': username, 'password': password}
-        login_url = 'https://fund-flask.onrender.com/login'
+        login_url = 'https://final-project-sever.onrender.com/login'
         UrlRequest(login_url, req_body=json.dumps(login_data),
                    on_success=self.on_login_success, on_failure=self.on_login_failure,
                    method='POST', req_headers={'Content-type': 'application/json'})
