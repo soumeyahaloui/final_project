@@ -13,6 +13,6 @@ def main():
     app = MyApp()
     app.run()
 
-# This ensures that the main function is only called when the script is executed directly, not when it's imported
+# This ensures that main function is only called when the script is executed directly, not when it's imported
 if __name__ == '__main__':
     main()
