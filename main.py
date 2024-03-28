@@ -1,7 +1,7 @@
 # main.py
 from kivy.config import Config
 
-# Set the size to common Android phone screen size
+# Set te size to common Android phone screen size
 Config.set('graphics', 'width', '360')  # 1080 / 3
 Config.set('graphics', 'height', '640')  # 1920 / 3
 Config.write()
