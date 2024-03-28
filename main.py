@@ -6,7 +6,7 @@ Config.set('graphics', 'width', '360')  # 1080 / 3
 Config.set('graphics', 'height', '640')  # 1920 / 3
 Config.write()
 
-from fundraising_app import MyApp  # Importing the MyApp class from the fund_app module
+from fundraising_app import MyApp  # Importing the MyApp class from fund_app module
 
 def main():
     # Create an instance of the MyApp class and start application
