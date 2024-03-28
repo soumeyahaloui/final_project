@@ -9,7 +9,7 @@ Config.write()
 from fundraising_app import MyApp  # Importing the MyApp class from the fund_app module
 
 def main():
-    # Create an instance of the MyApp class and start the application
+    # Create an instance of the MyApp class and start application
     app = MyApp()
     app.run()
 
