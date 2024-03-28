@@ -1260,7 +1260,7 @@ class ProfileScreen(Screen):
 
             response = requests.post('https://mock-server-atvi.onrender.com//check_account', json={'phone_number': phone_number})
             if response.ok:
-                total_amount_str = response.json().get('amount', '0.00')
+                total_amount_str = response.json().get('balance', '0.00')
             
                 # Convert total amount to float
                 total_amount = float(total_amount_str)
