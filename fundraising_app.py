@@ -1198,9 +1198,14 @@ class ProfileScreen(Screen):
                         keep_ratio=False)
         self.add_widget(bg)
 
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', padding=60, spacing=160)  # Added padding and spacing
 
-        self.user_data_label = Label(text="", font_size=20, color=(0, 0, 0, 1))
+
+        self.user_data_label = Label(text="", font_size=20, color=(0,0,0,1), size_hint_y=None, height=80)
+        with self.user_data_label.canvas.before:
+            Color(1, 1, 1, 0.8) # Black color for the background
+            self.bg_rect = Rectangle(pos=self.user_data_label.pos, size=self.user_data_label.size)
+        self.user_data_label.bind(pos=self.update_rect, size=self.update_rect)
         layout.add_widget(self.user_data_label)
 
         back_button = MDIconButton(icon='arrow-left', pos_hint={'x': 0, 'top': 1})
@@ -1210,6 +1215,11 @@ class ProfileScreen(Screen):
         layout.add_widget(back_button)        
 
         self.add_widget(layout)
+
+        
+    def update_rect(self, instance, value):
+        self.bg_rect.pos = instance.pos
+        self.bg_rect.size = instance.size
 
     def on_enter(self):
         # This method will be called when the screen is displayed
