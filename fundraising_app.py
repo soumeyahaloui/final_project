@@ -1245,7 +1245,7 @@ class ProfileScreen(Screen):
         if username and phone_number:
             if total_amount is not None:
                 # If total_amount is provided, include it in the profile text
-                profile_text = f"Username: {username}\nPhone Number: {phone_number}\nTotal Amount: {total_amount}"
+                profile_text = f"Username: {username}\nPhone Number: {phone_number}\nPhone credits: {total_amount}"
             else:
                 profile_text = f"Username: {username}\nPhone Number: {phone_number}"
 
