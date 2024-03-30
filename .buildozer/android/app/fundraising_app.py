@@ -603,7 +603,7 @@ class SecondScreen(Screen):
         return button_callback
 
     def fetch_data(self):
-        url = 'https://fund-flask.onrender.com/get_data'
+        url = 'https://final-project-sever.onrender.com/get_data'
         UrlRequest(url, on_success=self.on_request_success, on_failure=self.on_request_failure, on_error=self.on_request_error, on_redirect=self.on_request_redirect)
 
 
@@ -922,7 +922,7 @@ class SecondScreen(Screen):
         self.last_fetched_family_id += 1  
         next_family_id = self.last_fetched_family_id
 
-        base_url = 'https://fund-flask.onrender.com/'  
+        base_url = 'https://final-project-sever.onrender.com/'  
 
         UrlRequest(f'{base_url}/get_family_data/{next_family_id}', on_success=lambda req, res: self.update_frame_with_new_data(f'counter_{self.available_frames.pop(0)}', res), on_error=self.on_request_error, on_failure=self.on_request_error)
     
@@ -1083,7 +1083,7 @@ class SignUpScreen(Screen):
             return
 
         signup_data = {'username': username, 'number': number, 'password': password}
-        signup_url = 'https://fund-flask.onrender.com/register'
+        signup_url = 'https://final-project-sever.onrender.com/register'
         UrlRequest(signup_url, req_body=json.dumps(signup_data),
                    on_success=self.on_signup_success, on_failure=self.on_signup_failure,
                    method='POST', req_headers={'Content-type': 'application/json'})
@@ -1150,7 +1150,7 @@ class LoginScreen(Screen):
         username = self.username_input.text
         password = self.password_input.text
         login_data = {'username': username, 'password': password}
-        login_url = 'https://fund-flask.onrender.com/login'
+        login_url = 'https://final-project-sever.onrender.com/login'
         UrlRequest(login_url, req_body=json.dumps(login_data),
                    on_success=self.on_login_success, on_failure=self.on_login_failure,
                    method='POST', req_headers={'Content-type': 'application/json'})
@@ -1198,9 +1198,14 @@ class ProfileScreen(Screen):
                         keep_ratio=False)
         self.add_widget(bg)
 
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', padding=60, spacing=160)  # Added padding and spacing
 
-        self.user_data_label = Label(text="", font_size=20, color=(0, 0, 0, 1))
+
+        self.user_data_label = Label(text="", font_size=20, color=(0,0,0,1), size_hint_y=None, height=80)
+        with self.user_data_label.canvas.before:
+            Color(1, 1, 1, 0.8) # Black color for the background
+            self.bg_rect = Rectangle(pos=self.user_data_label.pos, size=self.user_data_label.size)
+        self.user_data_label.bind(pos=self.update_rect, size=self.update_rect)
         layout.add_widget(self.user_data_label)
 
         back_button = MDIconButton(icon='arrow-left', pos_hint={'x': 0, 'top': 1})
@@ -1210,6 +1215,11 @@ class ProfileScreen(Screen):
         layout.add_widget(back_button)        
 
         self.add_widget(layout)
+
+        
+    def update_rect(self, instance, value):
+        self.bg_rect.pos = instance.pos
+        self.bg_rect.size = instance.size
 
     def on_enter(self):
         # This method will be called when the screen is displayed
@@ -1235,7 +1245,7 @@ class ProfileScreen(Screen):
         if username and phone_number:
             if total_amount is not None:
                 # If total_amount is provided, include it in the profile text
-                profile_text = f"Username: {username}\nPhone Number: {phone_number}\nTotal Amount: {total_amount}"
+                profile_text = f"Username: {username}\nPhone Number: {phone_number}\nPhone credits: {total_amount}"
             else:
                 profile_text = f"Username: {username}\nPhone Number: {phone_number}"
 
@@ -1260,7 +1270,7 @@ class ProfileScreen(Screen):
 
             response = requests.post('https://mock-server-atvi.onrender.com//check_account', json={'phone_number': phone_number})
             if response.ok:
-                total_amount_str = response.json().get('amount', '0.00')
+                total_amount_str = response.json().get('balance', '0.00')
             
                 # Convert total amount to float
                 total_amount = float(total_amount_str)
