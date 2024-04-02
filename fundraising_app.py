@@ -621,6 +621,9 @@ class SecondScreen(Screen):
         logging.info("Request to Flask server successful.")
         logging.info(f"Data received: {result}")
 
+        print("Received data from server:")  # Add this print statement
+        print(result)  # Print the received data
+
         
         if isinstance(result, list) and len(result) > 0:
             
@@ -645,7 +648,6 @@ class SecondScreen(Screen):
                         top_text_widget.text = f"Goal: {data_item['Amount']}"
         else:
             logging.error("Data received is not in the expected format or is empty.")
-
 
 
     def open_menu(self, button):

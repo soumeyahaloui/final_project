@@ -1,4 +1,6 @@
- mysql -u sql11694019 -p -h sql11.freesqldatabase.com
+ mysql -u sql11695666 -p -h sql11.freesqldatabase.com
 
- wIJB3Bvi5t
+ 5Gy4bRlFwc
+
+ 
  
